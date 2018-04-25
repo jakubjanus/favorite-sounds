@@ -21,9 +21,12 @@ RSpec.describe 'Adding favorite sound', type: :request do
       expect(response_json).to be_valid_favorite_response
     end
 
-    it 'response body should include proper sound_id and folder' do
+    it 'response body includes proper sound_id' do
       expect(response_json['sound_id']).to eq(1)
-      expect(response_json['folder_id']).to be_nil
+    end
+
+    it 'response body includes default folder_id' do
+      expect(response_json['folder_id']).to eq('root')
     end
   end
 end
