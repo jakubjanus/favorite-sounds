@@ -14,13 +14,33 @@ module Api
       end
 
       def create
-        render json: { name: params[:name], id: 1 }, status: :created
+        @folder = Folder.new(user_id: user_id, name: folder_name)
+
+        if @folder.save
+          render json: FoldersPresenter::FolderPresenter.decorate(@folder), status: :created
+        else
+          render json: @folder.errors, status: :unprocessable_entity
+        end
+      end
+
+      def index
+        @folders = Folder.for_user(user_id)
+
+        render json: FoldersPresenter.decorate(@folders)
       end
 
       private
 
       def folder_id
         params[:id]
+      end
+
+      def folder_name
+        params[:name]
+      end
+
+      def user_id
+        1
       end
     end
   end

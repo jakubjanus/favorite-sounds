@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180425115025) do
+ActiveRecord::Schema.define(version: 20180425131233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,11 @@ ActiveRecord::Schema.define(version: 20180425115025) do
     t.integer "sound_id", null: false
     t.integer "user_id", null: false
     t.integer "folder_id"
+  end
+
+  create_table "folders", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "user_id"
   end
 
 end

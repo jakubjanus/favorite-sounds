@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :favorites, only: [:create]
-      resources :folders, only: %i[show create] do
+      resources :folders, only: %i[show create index] do
         collection do
           get '/root', to: 'folders#root'
         end
