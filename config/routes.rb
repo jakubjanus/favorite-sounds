@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resource :favorites, only: [:create]
+      resource :folders, only: [] do
+        get '/root', to: 'folders#root'
+      end
     end
   end
 end
