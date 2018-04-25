@@ -23,7 +23,7 @@ module Api
 
       # mock default user as user profiles management is out of the scope of this implementation
       def user_id
-        1
+        @current_user.id
       end
     end
   end

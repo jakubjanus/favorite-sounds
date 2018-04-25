@@ -40,7 +40,7 @@ module Api
       end
 
       def user_id
-        1
+        @current_user.id
       end
     end
   end
