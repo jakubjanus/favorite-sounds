@@ -1,9 +1,11 @@
 require 'rails_helper'
-require_relative './matchers/all'
+require_relative '../matchers/all'
+require_relative './shared_examples'
 
 RSpec.describe 'Adding favorite sound', type: :request do
   describe 'Adding sound to default folder' do
     let(:sound_id) { SecureRandom.random_number(100) }
+    let(:folder_id) { 'root' }
     let(:favorite_params) do
       { sound_id: sound_id }
     end
@@ -12,21 +14,7 @@ RSpec.describe 'Adding favorite sound', type: :request do
 
     subject { response }
 
-    it 'response is with 201 status' do
-      expect(subject.status).to eq(201)
-    end
-
-    it 'response body has correct schema' do
-      expect(response_json).to be_valid_favorite_response
-    end
-
-    it 'response body includes proper sound_id' do
-      expect(response_json['sound_id']).to eq(sound_id)
-    end
-
-    it 'response body includes default folder_id' do
-      expect(response_json['folder_id']).to eq('root')
-    end
+    it_behaves_like 'successful favorite addition'
 
     describe 'fetching root folder' do
       let(:expected_sound_item) do
