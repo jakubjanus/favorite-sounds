@@ -2,7 +2,9 @@ module Api
   module V1
     class FoldersController < ApplicationController
       def root
-        render json: { items: [{ sound_id: 1 }] }
+        @favorites = Favorite.for_root_folder
+
+        render json: FolderItemsPresenter.decorate(@favorites)
       end
     end
   end

@@ -30,7 +30,7 @@ RSpec.describe 'Adding favorite sound', type: :request do
 
     describe 'fetching root folder' do
       let(:expected_sound_item) do
-        { 'sound_id' => sound_id }
+        { 'sound_id' => sound_id, 'folder_id' => 'root' }
       end
 
       before { get '/api/v1/folders/root' }
