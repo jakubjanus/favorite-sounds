@@ -13,6 +13,10 @@ module Api
         render json: FolderItemsPresenter.decorate(@favorites)
       end
 
+      def create
+        render json: { name: params[:name], id: 1 }, status: :created
+      end
+
       private
 
       def folder_id
