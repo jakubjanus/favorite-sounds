@@ -18,5 +18,17 @@ RSpec.describe 'Adding favorite sound', type: :request do
     subject { response }
 
     it_behaves_like 'successful favorite addition'
+
+    describe 'fetching the custom folder' do
+      let(:expected_sound_item) do
+        { 'sound_id' => sound_id, 'folder_id' => folder_id }
+      end
+
+      before { get "/api/v1/folders/#{folder_id}" }
+
+      it 'response body includes just added sound' do
+        expect(response_json['items']).to include(expected_sound_item)
+      end
+    end
   end
 end

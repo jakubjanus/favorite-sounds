@@ -6,6 +6,18 @@ module Api
 
         render json: FolderItemsPresenter.decorate(@favorites)
       end
+
+      def show
+        @favorites = Favorite.for_folder(folder_id)
+
+        render json: FolderItemsPresenter.decorate(@favorites)
+      end
+
+      private
+
+      def folder_id
+        params[:id]
+      end
     end
   end
 end
