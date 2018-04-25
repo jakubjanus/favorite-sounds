@@ -15,7 +15,7 @@ RSpec.describe 'Adding favorite sound', type: :request do
     subject { response }
 
     it 'response is with 200 status' do
-      expect(subject.status).to eq(200)
+      expect(subject.status).to eq(204)
     end
   end
 end
