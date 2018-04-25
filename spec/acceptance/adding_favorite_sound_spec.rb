@@ -39,5 +39,13 @@ RSpec.describe 'Adding favorite sound', type: :request do
         expect(response_json['items']).to include(expected_sound_item)
       end
     end
+
+    describe 'adding sound without its id' do
+      let(:sound_id) { nil }
+
+      it 'responds with 422 status' do
+        expect(subject.status).to eq(422)
+      end
+    end
   end
 end
