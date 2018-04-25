@@ -40,11 +40,21 @@ RSpec.describe 'Adding favorite sound', type: :request do
       end
     end
 
-    describe 'adding sound without its id' do
-      let(:sound_id) { nil }
+    context 'Error cases' do
+      describe 'adding sound without its id' do
+        let(:sound_id) { nil }
 
-      it 'responds with 422 status' do
-        expect(subject.status).to eq(422)
+        it 'responds with 422 status' do
+          expect(subject.status).to eq(422)
+        end
+      end
+
+      describe 'adding same sound twice' do
+        before { post '/api/v1/favorites', params: favorite_params }
+
+        it 'responds with 422 status' do
+          expect(subject.status).to eq(422)
+        end
       end
     end
   end
