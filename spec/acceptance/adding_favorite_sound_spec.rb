@@ -1,19 +1,10 @@
 require 'rails_helper'
-
-RSpec::Matchers.define :be_valid_favorite_response do
-  match do |actual_response_json|
-    expect(actual_response_json).to have_key('sound_id')
-    expect(actual_response_json).to have_key('folder_id')
-  end
-end
-
+require_relative './matchers/all'
 
 RSpec.describe 'Adding favorite sound', type: :request do
   describe 'Adding sound to default folder' do
     let(:favorite_params) do
-      {
-        sound_id: 1
-      }
+      { sound_id: 1 }
     end
 
     before do
@@ -34,9 +25,5 @@ RSpec.describe 'Adding favorite sound', type: :request do
       expect(response_json['sound_id']).to eq(1)
       expect(response_json['folder_id']).to be_nil
     end
-  end
-
-  def response_json
-    JSON.parse(response.body)
   end
 end
